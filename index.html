@@ -5,32 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AngularJS</title>
+    <style>
+        table, th , td {
+           border: 1px solid grey;
+           border-collapse: collapse;
+           padding: 5px;
+        }
+        table tr:nth-child(odd) {
+           background-color: #f2f2f2;
+        }
+        table tr:nth-child(even) {
+           background-color: #ffffff;
+        }
+     </style>
 </head>
 <body>
     <h1>Welcome to AngularJS</h1>
-    <div ng-app="">
+    <div ng-app="mainApp" ng-controller="studentController">
         <table border="0">
             <tr>
-                <td><input type="checkbox" ng-model="enableDisableButton"> Disable Button</td>
-                <td><button ng-disabled="enableDisableButton">Click Me!</button></td>
+                <td>Enter first Name:</td>
+                <td><input type="text" ng-model="student.firstName"></td>
             </tr>
             <tr>
-                <td><input type="checkbox" ng-model="showHide1">Show Button</td>
-                <td><button ng-show="showHide1">Click Me!</button></td>
+                <td>Enter last Name:</td>
+                <td><input type="text" ng-model="student.lastName"></td>
             </tr>
             <tr>
-                <td><input type="checkbox" ng-model="showHide2">Hide Button</td>
-                <td><button ng-hide="showHide2">Click Me!</button></td>
+                <td>Full Name:</td>
+                <td>{{student.fullName()}}</td>
             </tr>
-
             <tr>
-                <td><p>Total Click : {{clickCounter}}</p></td>
-                <td><button ng-click="clickCounter=clickCounter+1">Click Me!</button></td>
+                <td>Enter fees Amount:</td>
+                <td><input type="text" ng-model="student.fees"></td>
+            </tr>
+            <tr>
+                <td>Subjects:</td>
+                <td>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Marks</th>
+                        </tr>
+                        <tr ng-repeat="subject in student.subjects">
+                            <td>{{subject.name}}</td>
+                            <td>{{subject.marks}}</td>
+                        </tr>
+                    </table>
+                </td>
             </tr>
         </table>
     </div>
 
 
     <script src="./angular.min.js"></script>
+    <script src="./mainApp.js"></script>
+    <script src="./studentController.js"></script>
 </body>
 </html>
