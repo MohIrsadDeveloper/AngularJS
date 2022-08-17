@@ -10,11 +10,24 @@
     <h1>Welcome to AngularJS</h1>
 <div ng-app="mainApp" ng-controller="studentController">
     Enter your first Name : <input type="text" ng-model="student.firstName"><br>
-    Enter your last Name : <input type="text" ng-model="student.lastName">
+    Enter your last Name : <input type="text" ng-model="student.lastName"><br>
+    Enter your fees : <input type="text" ng-model="student.fees"><br>
+    Enter your subject : <input type="text" ng-model="subjectName">
 
-    <p>Your first Name is : {{student.firstName}}</p>
-    <p>Your last Name is : {{student.lastName}}</p>
-    <h1>Your full Name is : {{student.fullName()}}</h1>
+    <h3>Your full Name is : {{student.fullName()}}</h3>
+    <h5>Your full Name is : {{student.fullName() | uppercase}}</h5>
+    <h5>Your full Name is : {{student.fullName() | lowercase}}</h5>
+    <h5>Total Fees is : {{student.fees | currency}}</h5>
+    <tr>
+        <td>Subject :</td>
+        <td>
+            <ul>
+                <li ng-repeat="subject in student.subjects  | orderBy : 'marks'" >
+                    {{subject.name + ', marks: ' + subject.marks}}
+                </li>
+            </ul>
+        </td>
+    </tr>
 </div>
 
 
@@ -26,6 +39,12 @@
             $scope.student = {
                 firstName : "Abdul",
                 lastName : "Idrisi",
+                fees : 500,
+                subjects : [
+                    {name : 'Physics', marks : 70},
+                    {name : 'Chemistry', marks : 80},
+                    {name : 'Maths', marks : 65},
+                ],
                 fullName : function () {
                     var studentObject;
                     studentObject = $scope.student;
