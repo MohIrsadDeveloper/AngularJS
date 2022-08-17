@@ -8,17 +8,31 @@
 </head>
 <body>
     <h1>Welcome to AngularJS</h1>
-<div ng-app="" ng-init="marks=[90,80,48,88]">
-    <p>Marks List</p>
-    <ol>
-        <li ng-repeat="mark in marks">
-            {{mark}}
-        </li>
-    </ol>
+<div ng-app="mainApp" ng-controller="studentController">
+    Enter your first Name : <input type="text" ng-model="student.firstName"><br>
+    Enter your last Name : <input type="text" ng-model="student.lastName">
+
+    <p>Your first Name is : {{student.firstName}}</p>
+    <p>Your last Name is : {{student.lastName}}</p>
+    <h1>Your full Name is : {{student.fullName()}}</h1>
 </div>
 
 
 
     <script src="./angular.min.js"></script>
+    <script>
+        var mainApp = angular.module('mainApp', []);
+        mainApp.controller('studentController', function ($scope) {
+            $scope.student = {
+                firstName : "Abdul",
+                lastName : "Idrisi",
+                fullName : function () {
+                    var studentObject;
+                    studentObject = $scope.student;
+                    return studentObject.firstName + " "  + studentObject.lastName;
+                }
+            }
+        })
+    </script>
 </body>
 </html>
