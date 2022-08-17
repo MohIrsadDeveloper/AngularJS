@@ -1,62 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AngularJS</title>
     <style>
-        table,
-        th,
-        td {
-            border: 1px solid grey;
-            border-collapse: collapse;
-            padding: 5px;
+        table, th , td {
+           border: 1px solid grey;
+           border-collapse: collapse;
+           padding: 5px;
         }
-
         table tr:nth-child(odd) {
-            background-color: #f2f2f2;
+           background-color: #f2f2f2;
         }
-
         table tr:nth-child(even) {
-            background-color: #ffffff;
+           background-color: #ffffff;
         }
-    </style>
+     </style>
 </head>
-
 <body>
     <h1>AngularJS Sample Application</h1>
-    <div ng-app="mainApp" ng-controller="studentController">
-        <div ng-include="'./src/include/main.html'"></div>
-        <div ng-include="'./src/include/subjects.html'"></div>
+    <div ng-app="" ng-controller="studentController">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Percentage</th>
+            </tr>
+            <tr ng-repeat="student in students">
+                <td>{{student.Name}}</td>
+                <td>{{student.RollNo}}</td>
+                <td>{{student.Percentage}}</td>
+            </tr>
+        </table>
     </div>
 
-    <script src="./angular.min.js"></script>
+    <!-- <script src="./angular.min.js"></script> -->
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js">
+    </script>
     <script>
-        var mainApp = angular.module("mainApp", []);
-        
-        mainApp.controller('studentController', function($scope) {
-           $scope.student = {
-              firstName: "Abdul",
-              lastName: "Idrisi",
-              fees:500,
-              
-              subjects:[
-                 {name:'Physics',marks:70},
-                 {name:'Chemistry',marks:80},
-                 {name:'Math',marks:65},
-                 {name:'English',marks:75},
-                 {name:'Hindi',marks:67}
-              ],
-              fullName: function() {
-                 var studentObject;
-                 studentObject = $scope.student;
-                 return studentObject.firstName + " " + studentObject.lastName;
-              }
-           };
-        });
-     </script>
+        function studentController($scope,$http) {
+            var url = './data.txt';
+            $http.get(url).then(function(response) {
+                $scope.students = response.data;
+            })
+        }
+    </script>
 </body>
-
 </html>
