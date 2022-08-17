@@ -28,58 +28,35 @@
 <body>
     <h1>AngularJS Sample Application</h1>
     <div ng-app="mainApp" ng-controller="studentController">
-        <form name="studentForm" novalidate>
-            <table>
-                <tr>
-                    <td>Enter first name:</td>
-                    <td>
-                        <input type="text" name="firstName" ng-model="firstName" required><br>
-                        <span style="color: red"
-                            ng-show="studentForm.firstName.$dirty && studentForm.firstName.$invalid">
-                            <span ng-show="studentForm.firstName.$error.required">First Name is required.</span>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Enter last name:</td>
-                    <td><input type="text" name="lastName" ng-model="lastName" required> <br>
-                        <span style="color:red" ng-show="studentForm.lastName.$dirty && studentForm.lastName.$invalid">
-                            <span ng-show="studentForm.lastName.$error.required">Last Name is required.</span>
-                        </span>
-                    </td><br>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="email" name="email" ng-model="email" required><br>
-                        <span style="color: red" ng-show="studentForm.email.$dirty && studentForm.email.$invalid">
-                            <span ng-show="studentForm.email.$error.required">Email is required</span>
-                            <span ng-show="studentForm.email.$error.email">Invalid Email Address</span>
-                        </span>
-                    
-                    </td>
-                </tr>
-                <tr>
-                    <td><button ng-click="reset()">Reset</button></td>
-                    <td>
-                        <button ng-disabled="studentForm.firstName.$dirty && studentForm.firstName.$invalid || studentForm.lastName.$dirty && studentForm.lastName.$invalid || studentForm.email.$dirty && studentForm.email.$invalid">Submit</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div ng-include="'./src/include/main.html'"></div>
+        <div ng-include="'./src/include/subjects.html'"></div>
     </div>
 
     <script src="./angular.min.js"></script>
     <script>
-        var mainApp = angular.module('mainApp', []);
-        mainApp.controller('studentController', function ($scope) {
-            $scope.reset = function () {
-                $scope.firstName = "Abdul";
-                $scope.lastName = "Idrisi";
-                $scope.email = "abdul@gmail.com";
-            }
-            $scope.reset();
-        })
-    </script>
+        var mainApp = angular.module("mainApp", []);
+        
+        mainApp.controller('studentController', function($scope) {
+           $scope.student = {
+              firstName: "Abdul",
+              lastName: "Idrisi",
+              fees:500,
+              
+              subjects:[
+                 {name:'Physics',marks:70},
+                 {name:'Chemistry',marks:80},
+                 {name:'Math',marks:65},
+                 {name:'English',marks:75},
+                 {name:'Hindi',marks:67}
+              ],
+              fullName: function() {
+                 var studentObject;
+                 studentObject = $scope.student;
+                 return studentObject.firstName + " " + studentObject.lastName;
+              }
+           };
+        });
+     </script>
 </body>
 
 </html>
