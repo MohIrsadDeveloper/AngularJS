@@ -8,28 +8,27 @@
 </head>
 <body>
     <h1>Welcome to AngularJS</h1>
-<div ng-app="mainApp" ng-controller="studentController">
-    Enter your first Name : <input type="text" ng-model="student.firstName"><br>
-    Enter your last Name : <input type="text" ng-model="student.lastName"><br>
-    Enter your fees : <input type="text" ng-model="student.fees"><br>
-    Enter your subject : <input type="text" ng-model="subjectName">
+    <div ng-app="">
+        <table border="0">
+            <tr>
+                <td><input type="checkbox" ng-model="enableDisableButton"> Disable Button</td>
+                <td><button ng-disabled="enableDisableButton">Click Me!</button></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" ng-model="showHide1">Show Button</td>
+                <td><button ng-show="showHide1">Click Me!</button></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" ng-model="showHide2">Hide Button</td>
+                <td><button ng-hide="showHide2">Click Me!</button></td>
+            </tr>
 
-    <h3>Your full Name is : {{student.fullName()}}</h3>
-    <h5>Your full Name is : {{student.fullName() | uppercase}}</h5>
-    <h5>Your full Name is : {{student.fullName() | lowercase}}</h5>
-    <h5>Total Fees is : {{student.fees | currency}}</h5>
-    <tr>
-        <td>Subject :</td>
-        <td>
-            <ul>
-                <li ng-repeat="subject in student.subjects  | orderBy : 'marks'" >
-                    {{subject.name + ', marks: ' + subject.marks}}
-                </li>
-            </ul>
-        </td>
-    </tr>
-</div>
-
+            <tr>
+                <td><p>Total Click : {{clickCounter}}</p></td>
+                <td><button ng-click="clickCounter=clickCounter+1">Click Me!</button></td>
+            </tr>
+        </table>
+    </div>
 
 
     <script src="./angular.min.js"></script>
