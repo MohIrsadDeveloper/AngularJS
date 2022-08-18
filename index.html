@@ -5,54 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js">
     </script>
     <title>AngularJS</title>
 </head>
 
 <body>
     <h1>AngularJS Sample Application</h1>
-    <div ng-app="mainApp">
-        <p><a href="#addStudent">Add Student</a></p>
-        <p><a href="#viewStudents">View Students</a></p>
-        <div ng-view></div>
-
-        <script type="text/ng-template" id="addStudent.html">
-            <h2>Add Student</h2>
-            {{message}}
-        </script>
-
-        <script type="text/ng-template" id="viewStudents.html">
-            <h2>View Students</h2>
-            {{message}}
-        </script>
+    <div ng-app="mainApp" ng-controller="shapeController">
+        <p>
+            {{message}} <br> {{type}}
+        </p>
+        <div ng-controller="circleController">
+            <p>
+                {{message}} <br> {{type}}
+            </p>
+        </div>
+        <div ng-controller="squareController">
+            <p>
+                {{message}} <br> {{type}}
+            </p>
+        </div>
     </div>
 
     <script>
-        var mainApp = angular.module('mainApp', ['ngRoute']);
-        mainApp.config(['$routeProvider', function ($routeProvider) {
-            $routeProvider
-            .when('/addStudent', {
-                templateUrl : 'addStudent.html',
-                controller : 'AddStudentController'
-            })
-            .when('/viewStudents', {
-                templateUrl : 'viewStudents.html',
-                controller : "ViewStudentsController"
-            })
-            .otherwise({
-                redirectTo : "addStudent"
-            })
-        }]);
-
-        mainApp.controller('AddStudentController', function ($scope) {
-            $scope.message = "This page will be used to display add student form";
+        var mainApp = angular.module("mainApp", [])
+        mainApp.controller("shapeController", function ($scope) {
+            $scope.message = "In Shape Controller";
+            $scope.type = "Shape";
         });
-
-        mainApp.controller('ViewStudentsController', function ($scope) {
-            $scope.message = 'This page will be used to display view student form';
+        mainApp.controller("circleController", function ($scope) {
+            $scope.message = "In Circle Controller";
         });
+        mainApp.controller("squareController", function ($scope) {
+            $scope.message = "In Square Controller";
+            $scope.type = "Square"
+        })
     </script>
 </body>
 
